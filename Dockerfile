@@ -1,15 +1,5 @@
 FROM alpine
 
-RUN apk add --update \
-	musl-dev \
-	gcc \
-	libffi-dev \
-	python3 \
-	python3-dev \
-	py3-pip
+ADD ./camo /root/camo
 
-RUN pip install bcrypt
-
-COPY ./bcrypt.sh /root/bcrypt.sh
-
-CMD /root/bcrypt.sh
+CMD ["sh", "-c", "echo -n $CLEAR_PASSWORD | /root/camo"]

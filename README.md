@@ -1,19 +1,18 @@
-Generate a bcrypted password.
+Generate a bcrypted and encoded password.
 
-Usage:
+You can go ahead and throw the output into a k8s secret yaml.
+
+## Usage
+
+### With a Docker image (no binary install)
 
 ```
 PASS=foobar
 docker run -e CLEAR_PASSWORD="$PASS" ghcr.io/warehouse-13/camo:latest
 ```
 
-Output will be something like:
+### With released binary
 
 ```
-JDIkMTIkQlVJSDVtSDlkR3ZBakZJM3cyRGRWdU0xMkUubUtHTUpodEF5MVJnMUpXWXl5Y1RjbkhDLksK
+echo -n foobar | camo
 ```
-
-This is base64 encoded, you can go ahead and throw this into a k8s secret yaml.
-
-_I will make this smarter soon, like write it in python and have an
-option to spit out a kube secret, but this will do for now._
