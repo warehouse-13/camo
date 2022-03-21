@@ -1,6 +1,4 @@
-Generate a bcrypted and encoded password.
-
-You can go ahead and throw the output into a k8s secret yaml.
+Generate a bcrypted and/or encoded password.
 
 ## Usage
 
