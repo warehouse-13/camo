@@ -17,7 +17,7 @@ release: ## Cross compile bins for camo
 docker-build: build ## Build docker image
 	docker build -t ghcr.io/warehouse-13/camo:latest .
 
-docker-push: ## Push docker image
+docker-push: docker-build ## Push docker image
 	docker push ghcr.io/warehouse-13/camo:latest
 
 .PHONY: help
