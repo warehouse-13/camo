@@ -24,10 +24,12 @@ func main() {
 
 	if !hasPipedStdin() {
 		fmt.Println("usage: `echo -n foo | camo`")
+
 		os.Exit(1)
 	}
 
 	pwg := p.NewPasswordGenerator(os.Stdin, cost)
+
 	hash, err := pwg.Generate()
 	if err != nil {
 		fmt.Println(err)
@@ -41,6 +43,7 @@ func main() {
 		s, err := secret.Create(hash)
 		if err != nil {
 			fmt.Println(err)
+
 			os.Exit(1)
 		}
 
@@ -51,9 +54,9 @@ func main() {
 		result = string(hash)
 	}
 
-	_, err = fmt.Fprintf(os.Stdout, "%s\n", result)
-	if err != nil {
+	if _, err := fmt.Fprintf(os.Stdout, "%s\n", result); err != nil {
 		fmt.Println(err)
+
 		os.Exit(1)
 	}
 
@@ -61,9 +64,12 @@ func main() {
 }
 
 func hasPipedStdin() bool {
+	// TODO: handle this err
 	stat, _ := os.Stdin.Stat()
+
 	if (stat.Mode() & os.ModeCharDevice) == 0 {
 		return true
 	}
+
 	return false
 }
